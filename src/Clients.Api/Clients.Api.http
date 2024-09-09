@@ -1,12 +1,12 @@
-@Clients.Api_HostAddress = http://localhost:7057
+@Clients.Api_HostAddress = http://localhost:8080
 
 POST {{Clients.Api_HostAddress}}/clients/
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john@random.com",
+  "name": "Justin Dune",
+  "email": "justindune@random.com",
   "membership": "Regular",
   "BirthDate": "1990-01-01"
 }

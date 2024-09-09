@@ -9,8 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="opentelemetry" Version="1.9.0" />
-      <PackageReference Include="opentelemetry.exporter.console" Version="1.9.0" />
+      <PackageReference Include="OpenTelemetry" Version="1.9.0" />
+      <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.9.0" />
     </ItemGroup>
 
 </Project>
