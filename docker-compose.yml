@@ -91,3 +91,8 @@
       - "8084:8080"
     depends_on:
       - rabbitmq
+  jaeger:
+    image: jaegertracing/all-in-one:1.58.0
+    ports:
+      - "16686:16686" # Jaeger Web UI
+      - "4317:4317" # OTLP 
