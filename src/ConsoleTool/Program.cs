@@ -4,20 +4,20 @@ using OpenTelemetry.Trace;
 
 using var traceProvider = OpenTelemetry.Sdk.CreateTracerProviderBuilder()
     .SetResourceBuilder(
-    ResourceBuilder.CreateDefault()
-    .AddService("ConsoleTool")
+        ResourceBuilder.CreateDefault()
+            .AddService("ConsoleTool")
     )
     .AddSource(ApplicationDiagnostics.ActivitySourceName)
     .AddConsoleExporter()
-    .Build()
-    ;
+    .Build();
 
 await DoWork();
-using var activity = ApplicationDiagnostics.ActivitySource.StartActivity("Do work");
+
 Console.WriteLine("Done!");
 
 static async Task DoWork()
 {
+    using var activity = ApplicationDiagnostics.ActivitySource.StartActivity("Do Work");
     await StepOne();
     await StepTwo();
 }

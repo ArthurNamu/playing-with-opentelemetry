@@ -1,5 +1,8 @@
+using System.Diagnostics;
 using System.Text.Json;
 using Clients.Api.Clients.Risk;
+using Clients.Api.Diagnostics;
+using Clients.Api.Diagnostics.Extensions;
 using Clients.Contracts.Events;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -70,11 +73,15 @@ internal static class ClientsApi
                     Addresses = newClient.Addresses
                 };
 
+                Activity.Current.EnrichWithClient(newClient);
+
                 db.Clients.Add(client);
                 await db.SaveChangesAsync();
 
+                ApplicationDiagnostics.ClientsCreatedCounter.Add(1);
+
                 eventsPublisher.Publish(client);
-                
+
                 return TypedResults.Created($"/clients/{client.Id}", client);
             });
 
