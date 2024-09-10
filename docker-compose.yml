@@ -12,7 +12,7 @@
         RiskEvaluator__Url: http://risk.evaluator.service:8080
         Feature__PublishEventFailure: false
     ports:  
-      - "8080:8080"
+      - "8085:8080"
     depends_on:
       - clients.db
       - rabbitmq
@@ -96,3 +96,11 @@
     ports:
       - "16686:16686" # Jaeger Web UI
       - "4317:4317" # OTLP 
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    ports:
+     - "9090:9090"
+    # volumes:
+    #  - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+     - '--config.file=/etc/prometheus/prometheus.yml'

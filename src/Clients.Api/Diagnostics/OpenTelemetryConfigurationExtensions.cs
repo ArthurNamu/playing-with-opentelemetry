@@ -1,5 +1,6 @@
 using System.Reflection;
 using Npgsql;
+using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
@@ -32,7 +33,12 @@ public static class OpenTelemetryConfigurationExtensions
                     // .AddConsoleExporter()
                     .AddOtlpExporter(options => 
                         options.Endpoint = new Uri(builder.Configuration.GetValue<string>("Jaeger")!))
-                );
+                )
+            .WithMetrics(metrics => 
+                metrics.AddMeter(ApplicationDiagnostics.Meter.Name)
+                        .AddConsoleExporter()
+                        .AddPrometheusExporter()
+            );
         
         return builder;
     }
